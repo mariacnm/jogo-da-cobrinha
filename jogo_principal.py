@@ -75,7 +75,7 @@ while True:
     for posicao in cobra:
         window.blit(cobra_skin,posicao)
 
-    #window.blit(background, (0, 0))
+    window.blit(background, (0, 0))
     window.blit(maca_img_small,maca.rect)
 
     pygame.display.update()
