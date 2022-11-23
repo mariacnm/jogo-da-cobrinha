@@ -12,8 +12,8 @@ LEFT=3
 
 WIDTH = 600
 HEIGHT = 600
-MACA_WIDTH = 10
-MACA_HEIGHT = 10
+MACA_WIDTH = 20
+MACA_HEIGHT = 20
 window= pygame.display.set_mode((WIDTH,HEIGHT))
 pygame.display.set_caption("Jogo Da Cobrinha")
 
