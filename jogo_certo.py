@@ -61,3 +61,12 @@ while True:
     if collision(apple_pos, snake_pos[0]):
         snake_pos.append((-10, -10))
         apple_pos = random_on_grid()
+
+    for pos in snake_pos:
+        screen.blit(snake_surface, pos)
+
+    for i in range(len(snake_pos) - 1, 0, -1):
+        if collision(snake_pos[0], snake_pos[i]):
+            restart_game()
+            break
+        snake_pos[i] = snake_pos[i - 1]
