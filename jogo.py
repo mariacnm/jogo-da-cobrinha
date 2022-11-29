@@ -4,11 +4,6 @@ import random
 
 pygame.init()
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> d6c04f1c1bbb9e6c845fe4f00049e39d2d4602b9
 def on_grid_random():
     x = random.randint(0,590)
     y = random.randint(0,590)
@@ -22,10 +17,6 @@ RIGHT = 1
 DOWN = 2
 LEFT = 3
 
-<<<<<<< HEAD
-
-=======
->>>>>>> d6c04f1c1bbb9e6c845fe4f00049e39d2d4602b9
 pygame.init()
 window = pygame.display.set_mode((600,600))
 PIXEL_SIZE = 10
