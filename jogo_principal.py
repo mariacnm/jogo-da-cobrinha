@@ -4,6 +4,14 @@ import random
 
 pygame.init()
 
+
+
+
+def collision(c1, c2):
+    return (c1[0] == c2[0]) and (c1[1] == c2[1])
+    #return (c1[0]>c2[0]-10) and (c1[0]<c2[0]+10) and (c1[1]>c2[1]-10) and (c1[1]<c2[1]+10)
+
+
 #posições iniciais
 UP=0
 DOWN=1
@@ -20,7 +28,7 @@ pygame.display.set_caption("Jogo Da Cobrinha")
 cobra= [(200,200),(210,200),(220,200)]
 #declarando a possição da cobrinha
 cobra_skin= pygame.Surface((10,10))
-cobra_skin.fill((255,255,255))# cor da cobra = branca
+cobra_skin.fill((0,0,0))# cor da cobra = preto
 direcao= LEFT
 
 clock = pygame.time.Clock()
@@ -36,8 +44,8 @@ class Maca(pygame.sprite.Sprite):
 
         self.image = img
         self.rect = self.image.get_rect()
-        self.rect.x = random.randint(0, WIDTH-MACA_WIDTH)
-        self.rect.y = random.randint(0, HEIGHT-MACA_HEIGHT)
+        self.rect.x = random.randint(0, WIDTH-MACA_WIDTH)//10*10
+        self.rect.y = random.randint(0, HEIGHT-MACA_HEIGHT)//10*10
         self.speedx = 0
         self.speedy = 0
 
@@ -58,7 +66,16 @@ while True:
                 direcao = LEFT
             if event.key == K_RIGHT:
                 direcao = RIGHT
+                
 
+    if collision(cobra[0], maca.rect):
+        print('bateu')
+        maca.rect.x = random.randint(0, WIDTH-MACA_WIDTH)//10*10
+        maca.rect.y = random.randint(0, HEIGHT-MACA_HEIGHT)//10*10
+        print('bateu')
+        cobra.append((0,0))
+
+    
     for i in range(len(cobra) - 1, 0, -1):
         cobra[i] = (cobra[i-1][0], cobra[i-1][1])
 
@@ -72,10 +89,20 @@ while True:
         cobra[0] = (cobra[0][0] - 10, cobra[0][1])
 
     window.fill((0,0,0)) #para limpar a tela
+    window.blit(background, (0, 0))
+
+
     for posicao in cobra:
         window.blit(cobra_skin,posicao)
 
-    window.blit(background, (0, 0))
+   
+
     window.blit(maca_img_small,maca.rect)
+
+
+
+
+
+
 
     pygame.display.update()
