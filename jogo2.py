@@ -28,7 +28,6 @@ def load_assets():
     # Carrega os sons do jogo
     pygame.mixer.music.load('assets/snd/tgfcoder-FrozenJam-SeamlessLoop.ogg')
     pygame.mixer.music.set_volume(0.4)
-    assets['boom_sound'] = pygame.mixer.Sound('assets/snd/expl3.wav')
-    assets['destroy_sound'] = pygame.mixer.Sound('assets/snd/expl6.wav')
-    assets['pew_sound'] = pygame.mixer.Sound('assets/snd/pew.wav')
+    assets['mordendo_sound'] = pygame.mixer.Sound('assets/snd/expl3.wav')
+    assets['musiquinha_sound'] = pygame.mixer.Sound('assets/snd/pew.wav')
     return assets
