@@ -32,11 +32,30 @@ def load_assets():
     #assets['musiquinha_sound'] = pygame.mixer.Sound('assets/snd/pew.wav')
     return assets
 
-class Cobra(pygame.sprite.Sprite):
+class Corpo(pygame.sprite.Sprite):
     def _init_(self, groups, assets):
         # Construtor da classe mãe (Sprite).
         pygame.sprite.Sprite._init_(self)
 
+        self.lista = [(200,200),(210,200),(220,200)]
+        self.rect.centerx = WIDTH / 2
+        self.rect.bottom = HEIGHT / 2
+        self.speedx = 5
+        self.speedy = 0
+        self.groups = groups
+        self.assets = assets
+
+    def update(self):
+            # Atualização da posição da nave
+            self.rect.x += self.speedx
+            
+
+class Cabeca(pygame.sprite.Sprite):
+    def _init_(self, groups, assets):
+        # Construtor da classe mãe (Sprite).
+        pygame.sprite.Sprite._init_(self)
+
+        self.lista = []
         self.image = assets['cabeça_img']
         self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
@@ -46,3 +65,14 @@ class Cobra(pygame.sprite.Sprite):
         self.speedy = 0
         self.groups = groups
         self.assets = assets
+
+
+    def update(self):
+            # Atualização da posição da nave
+            self.rect.x += self.speedx
+
+            # Mantem dentro da tela
+            if self.rect.right > WIDTH:
+                self.rect.right = WIDTH
+            if self.rect.left < 0:
+                self.rect.left = 0
