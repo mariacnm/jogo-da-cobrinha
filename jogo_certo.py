@@ -11,10 +11,11 @@ PIXEL_SIZE = 10
 INIT = 0
 GAME = 1
 QUIT = 2
-
+assets = {}
 pygame.mixer.music.load('assets.py/musica_principal.mp3')
 pygame.mixer.music.set_volume(0.4)
 mordendo_sound = pygame.mixer.Sound('assets.py/mordendo.mp3')
+pontos = pygame.font.Font('assets.py/font/PressStart2P.ttf', 28)
 
 def tela_inicial(screen):
     background= pygame.image.load("jogo.png").convert()
@@ -128,7 +129,11 @@ def jogo(screen):
             snake_pos[0] = (snake_pos[0][0] - PIXEL_SIZE, snake_pos[0][1])
         elif snake_direction == K_RIGHT:
             snake_pos[0] = (snake_pos[0][0] + PIXEL_SIZE, snake_pos[0][1])
-        pygame.display.update()
+
+        text_surface = pontos.render("{:08d}".format(score), True, (255, 255, 0))
+        text_rect = text_surface.get_rect()
+        text_rect.midtop = (600 / 2,  10)
+        screen.blit(text_surface, text_rect)
 state = INIT
 while state!=QUIT:
     if state == INIT:
