@@ -8,8 +8,10 @@ pygame.mixer.init()
 WINDOW_SIZE = (600, 600)
 PIXEL_SIZE = 10
 
-pygame.mixer.music.load('assets/mordendo.mp3')
+pygame.mixer.music.load('assets/musica_principal.mp3')
 pygame.mixer.music.set_volume(0.4)
+mordendo_sound = pygame.mixer.Sound('assets/mordendo.mp3')
+
 
 def collision(pos1, pos2):
     return pos1 == pos2
@@ -50,6 +52,7 @@ apple_pos = random_on_grid()
     snake_direction = K_LEFT
     apple_pos = random_on_grid()'''
 score=0
+pygame.mixer.music.play(loops=-1)
 while True:
     pygame.time.Clock().tick(15)
     screen.fill((0, 0, 0))
@@ -64,6 +67,7 @@ while True:
     screen.blit(apple_surface, apple_pos)
 
     if collision(apple_pos, snake_pos[0]):
+
         snake_pos.append((-10, -10))
         apple_pos = random_on_grid()
         score+=10
