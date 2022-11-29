@@ -12,12 +12,12 @@ INIT = 0
 GAME = 1
 QUIT = 2
 
-pygame.mixer.music.load('assets.py/sons/musica_principal.mp3')
+pygame.mixer.music.load('assets.py/sons/musica_principal2.mp3')
 pygame.mixer.music.set_volume(0.4)
 mordendo_sound = pygame.mixer.Sound('assets.py/sons/mordendo.mp3')
 
 def tela_inicial(screen):
-    background= pygame.image.load("jogo.png").convert()
+    background= pygame.image.load("assets.py/imagens/jogo.png").convert()
     background_rect= background.get_rect()
 
 
