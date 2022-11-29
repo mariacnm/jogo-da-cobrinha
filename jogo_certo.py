@@ -44,7 +44,7 @@ apple_pos = random_on_grid()
     snake_pos = [(250, 50), (260, 50), (270, 50)]
     snake_direction = K_LEFT
     apple_pos = random_on_grid()'''
-
+score=0
 while True:
     pygame.time.Clock().tick(15)
     screen.fill((0, 0, 0))
@@ -61,6 +61,8 @@ while True:
     if collision(apple_pos, snake_pos[0]):
         snake_pos.append((-10, -10))
         apple_pos = random_on_grid()
+        score+=10
+        print(score)
 
     for pos in snake_pos:
         screen.blit(snake_surface, pos)
