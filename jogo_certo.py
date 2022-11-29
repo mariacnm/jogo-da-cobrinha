@@ -37,13 +37,13 @@ apple_surface.fill((255, 0, 0))
 apple_pos = random_on_grid()
 
 
-def restart_game():
+'''def restart_game():
     global snake_pos
     global apple_pos
     global snake_direction
     snake_pos = [(250, 50), (260, 50), (270, 50)]
     snake_direction = K_LEFT
-    apple_pos = random_on_grid()
+    apple_pos = random_on_grid()'''
 
 while True:
     pygame.time.Clock().tick(15)
@@ -67,12 +67,16 @@ while True:
 
     for i in range(len(snake_pos) - 1, 0, -1):
         if collision(snake_pos[0], snake_pos[i]):
-            restart_game()
+            #restart_game()
+            pygame.quit()
+            quit()
             break
         snake_pos[i] = snake_pos[i - 1]
 
     if off_limits(snake_pos[0]):
-        restart_game()
+       
+       pygame.quit()
+       quit()
 
     if snake_direction == K_UP:
         snake_pos[0] = (snake_pos[0][0], snake_pos[0][1] - PIXEL_SIZE)
