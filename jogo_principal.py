@@ -20,8 +20,8 @@ LEFT=3
 
 WIDTH = 600
 HEIGHT = 600
-MACA_WIDTH = 20
-MACA_HEIGHT = 20
+MACA_WIDTH = 25
+MACA_HEIGHT = 25
 window= pygame.display.set_mode((WIDTH,HEIGHT))
 pygame.display.set_caption("Jogo Da Cobrinha")
 
@@ -52,6 +52,7 @@ class Maca(pygame.sprite.Sprite):
 maca = Maca(maca_img_small)
 LPS = 10
 while True:
+    window.blit(background, (0, 0))
     clock.tick(10)
     for event in pygame.event.get():
         if event.type == QUIT:
@@ -95,8 +96,12 @@ while True:
     for posicao in cobra:
         window.blit(cobra_skin,posicao)
 
+<<<<<<< HEAD
    
 
+=======
+    #window.blit(background, (0, 0))
+>>>>>>> d6c04f1c1bbb9e6c845fe4f00049e39d2d4602b9
     window.blit(maca_img_small,maca.rect)
 
 

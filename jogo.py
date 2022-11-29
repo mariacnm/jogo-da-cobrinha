@@ -4,8 +4,11 @@ import random
 
 pygame.init()
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> d6c04f1c1bbb9e6c845fe4f00049e39d2d4602b9
 def on_grid_random():
     x = random.randint(0,590)
     y = random.randint(0,590)
@@ -14,14 +17,15 @@ def on_grid_random():
 def collision(c1, c2):
     return (c1[0] == c2[0]) and (c1[1] == c2[1])
 
-
-
 UP = 0
 RIGHT = 1
 DOWN = 2
 LEFT = 3
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> d6c04f1c1bbb9e6c845fe4f00049e39d2d4602b9
 pygame.init()
 window = pygame.display.set_mode((600,600))
 PIXEL_SIZE = 10
@@ -38,6 +42,24 @@ cobra_skin.fill((255,255,255))
 
 apple_pos = []
 
+class Cobra:
+    def __init__(self):
+        
+        self.speedx = random.randint(-3, 3)
+        self.speedy = random.randint(2, 9)
+
+    def update(self):
+        # Atualizando a posição do meteoro
+        self.rect.x += self.speedx
+        self.rect.y += self.speedy
+        # Se o meteoro passar do final da tela, volta para cima e sorteia
+        # novas posições e velocidades
+        if self.rect.top > HEIGHT or self.rect.right < 0 or self.rect.left > WIDTH:
+            self.rect.x = random.randint(0, WIDTH-METEOR_WIDTH)
+            self.rect.y = random.randint(-100, -METEOR_HEIGHT)
+            self.speedx = random.randint(-3, 3)
+            self.speedy = random.randint(2, 9)
+
 for i in range(0, 5):
     apple_pos.append(on_grid_random())
 
@@ -49,7 +71,6 @@ direcao = LEFT
 clock = pygame.time.Clock() 
 
 background = pygame.image.load('grama.png').convert()
-
 
 while True:
    
@@ -97,3 +118,5 @@ while True:
         window.blit(cobra_skin,pos)
 
     pygame.display.update()
+
+
