@@ -32,6 +32,10 @@ snake_surface = pygame.Surface((PIXEL_SIZE, PIXEL_SIZE))
 snake_surface.fill((255, 255, 255))
 snake_direction = K_LEFT
 
+maca_pos = []
+for i in range(0,5):
+    maca_pos.append(random_on_grid())
+
 apple_surface = pygame.Surface((PIXEL_SIZE, PIXEL_SIZE))
 apple_surface.fill((255, 0, 0))
 apple_pos = random_on_grid()
@@ -46,7 +50,7 @@ def restart_game():
     apple_pos = random_on_grid()
 
 while True:
-    pygame.time.Clock().tick(15)
+    pygame.time.Clock().tick(10)
     screen.fill((0, 0, 0))
     for event in pygame.event.get():
         if event.type == QUIT:
@@ -57,10 +61,13 @@ while True:
                 snake_direction = event.key
 
     screen.blit(apple_surface, apple_pos)
-
-    if collision(apple_pos, snake_pos[0]):
-        snake_pos.append((-10, -10))
-        apple_pos = random_on_grid()
+    for maca_pos_u in maca_pos:
+        if collision(maca_pos_u, snake_pos[0]):
+            #snake_pos.append((-10, -10))
+            #apple_pos = random_on_grid()
+            maca_pos.remove(maca_pos_u)
+            maca_pos.append(random_on_grid())
+            snake_pos.append((0,0))
 
     for pos in snake_pos:
         screen.blit(snake_surface, pos)
@@ -83,4 +90,8 @@ while True:
     elif snake_direction == K_RIGHT:
         snake_pos[0] = (snake_pos[0][0] + PIXEL_SIZE, snake_pos[0][1])
 
+    for maca_pos_u in maca_pos:
+        WINDOW_SIZE.blit(apple_surface,maca_pos_u)
+    for pos in snake_surface:
+        WINDOW_SIZE.blit(snake_surface,pos)
     pygame.display.update()
