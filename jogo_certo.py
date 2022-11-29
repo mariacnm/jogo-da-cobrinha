@@ -136,4 +136,4 @@ while state!=QUIT:
     elif state == GAME:
         state = jogo(screen)
     else:
-        state = QUIT
+        state = QUIT
