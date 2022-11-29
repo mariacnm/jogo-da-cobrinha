@@ -2,9 +2,14 @@ import pygame
 from pygame.locals import *
 import random
 
+pygame.init()
+pygame.mixer.init()
+
 WINDOW_SIZE = (600, 600)
 PIXEL_SIZE = 10
 
+pygame.mixer.music.load('assets/mordendo.mp3')
+pygame.mixer.music.set_volume(0.4)
 
 def collision(pos1, pos2):
     return pos1 == pos2
