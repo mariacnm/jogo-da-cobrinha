@@ -70,3 +70,17 @@ while True:
             restart_game()
             break
         snake_pos[i] = snake_pos[i - 1]
+
+    if off_limits(snake_pos[0]):
+        restart_game()
+
+    if snake_direction == K_UP:
+        snake_pos[0] = (snake_pos[0][0], snake_pos[0][1] - PIXEL_SIZE)
+    elif snake_direction == K_DOWN:
+        snake_pos[0] = (snake_pos[0][0], snake_pos[0][1] + PIXEL_SIZE)
+    elif snake_direction == K_LEFT:
+        snake_pos[0] = (snake_pos[0][0] - PIXEL_SIZE, snake_pos[0][1])
+    elif snake_direction == K_RIGHT:
+        snake_pos[0] = (snake_pos[0][0] + PIXEL_SIZE, snake_pos[0][1])
+
+    pygame.display.update()
