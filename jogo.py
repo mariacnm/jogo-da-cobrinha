@@ -6,9 +6,6 @@ pygame.init()
 
 
 
-
-
-
 def on_grid_random():
     x = random.randint(0,590)
     y = random.randint(0,590)
@@ -25,13 +22,18 @@ DOWN = 2
 LEFT = 3
 
 
-
 pygame.init()
 window = pygame.display.set_mode((600,600))
+PIXEL_SIZE = 10
 pygame.display.set_caption('Snake')
+
+
+
 
 cobra = [(200, 200), (210, 200), (220,200)]
 cobra_skin = pygame.Surface((10,10))
+
+cobra_surface = pygame.Surface((PIXEL_SIZE, PIXEL_SIZE))
 cobra_skin.fill((255,255,255))
 
 apple_pos = []
@@ -71,11 +73,11 @@ while True:
             apple_pos.remove(apple_pos_u)
             apple_pos.append(on_grid_random())
             cobra.append((0,0))
-        #if collision (cobra[0] in cobra):
-            #while False
+        
     for i in range(len(cobra) - 1, 0, -1):
         cobra[i] = (cobra[i-1][0], cobra[i-1][1])
     
+ 
     
     if direcao == UP:
         cobra[0] = (cobra[0][0], cobra[0][1] - 10)
