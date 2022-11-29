@@ -12,6 +12,18 @@ pygame.mixer.music.load('assets.py/musica_principal.mp3')
 pygame.mixer.music.set_volume(0.4)
 mordendo_sound = pygame.mixer.Sound('assets.py/mordendo.mp3')
 
+def tela_inicial(screen):
+    background= pygame.image.load("jogo.png").convert()
+    background_rect= background.get_rect()
+
+    rodando=True
+    while rodando:
+         
+        for event in pygame.event.get():
+            if event.type== pygame.QUIT:
+
+
+
 
 def collision(pos1, pos2):
     return pos1 == pos2
