@@ -21,8 +21,8 @@ MACA_HEIGHT = 10
 
 def load_assets():
     assets = {}
-    assets['cabeça.png'] = pygame.image.load('assets/cabeça.png').convert_alpha()
-    assets['cabeça.png'] = pygame.transform.scale(assets['cabeça.png'], (COBRA_WIDTH, COBRA_HEIGHT))
+    assets['cabeça_png'] = pygame.image.load('assets/cabeça.png').convert_alpha()
+    assets['cabeça_png'] = pygame.transform.scale(assets['cabeça.png'], (COBRA_WIDTH, COBRA_HEIGHT))
     assets["score_font"] = pygame.font.Font('assets/font/PressStart2P.ttf', 28)
 
     # Carrega os sons do jogo
@@ -32,3 +32,17 @@ def load_assets():
     #assets['musiquinha_sound'] = pygame.mixer.Sound('assets/snd/pew.wav')
     return assets
 
+class Cobra(pygame.sprite.Sprite):
+    def _init_(self, groups, assets):
+        # Construtor da classe mãe (Sprite).
+        pygame.sprite.Sprite._init_(self)
+
+        self.image = assets['cabeça_img']
+        self.mask = pygame.mask.from_surface(self.image)
+        self.rect = self.image.get_rect()
+        self.rect.centerx = WIDTH / 2
+        self.rect.bottom = HEIGHT / 2
+        self.speedx = 5
+        self.speedy = 0
+        self.groups = groups
+        self.assets = assets
