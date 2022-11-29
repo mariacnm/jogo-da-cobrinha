@@ -57,3 +57,7 @@ while True:
                 snake_direction = event.key
 
     screen.blit(apple_surface, apple_pos)
+
+    if collision(apple_pos, snake_pos[0]):
+        snake_pos.append((-10, -10))
+        apple_pos = random_on_grid()
