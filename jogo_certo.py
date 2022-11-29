@@ -2,6 +2,12 @@ import pygame
 from pygame.locals import *
 import random
 
+WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
+RED = (255, 0, 0)
+GREEN = (0, 255, 0)
+BLUE = (0, 0, 255)
+YELLOW = (255, 255, 0)
 
 pygame.init()
 pygame.mixer.init()
@@ -57,6 +63,14 @@ def random_on_grid():
     y = random.randint(0, WINDOW_SIZE[1])
     return x // PIXEL_SIZE * PIXEL_SIZE, y // PIXEL_SIZE * PIXEL_SIZE
 
+font_name = pygame.font.match_font("comicsansms")
+def mensagem_tela(message, color, font_size, x, y):
+    font = pygame.font.SysFont(font_name, font_size)
+    text = font.render(message, True, color)
+    text_rect = text.get_rect()
+    text_rect.center = (x,y)
+    return screen.blit(text, text_rect)
+
 
 pygame.init()
 screen = pygame.display.set_mode(WINDOW_SIZE)
@@ -103,6 +117,7 @@ def jogo(screen):
             snake_pos.append((-10, -10))
             apple_pos = random_on_grid()
             score+=10
+            printa = mensagem_tela("Score: " + str(score), WHITE, 24, 600/2, 600/2)
             print(score)
 
         for pos in snake_pos:
