@@ -45,3 +45,15 @@ def restart_game():
     snake_direction = K_LEFT
     apple_pos = random_on_grid()
 
+while True:
+    pygame.time.Clock().tick(15)
+    screen.fill((0, 0, 0))
+    for event in pygame.event.get():
+        if event.type == QUIT:
+            pygame.quit()
+            quit()
+        elif event.type == KEYDOWN:
+            if event.key in [K_UP, K_DOWN, K_LEFT, K_RIGHT]:
+                snake_direction = event.key
+
+    screen.blit(apple_surface, apple_pos)
