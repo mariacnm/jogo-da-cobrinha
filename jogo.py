@@ -4,8 +4,11 @@ import random
 
 pygame.init()
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> d9ebb8f7598099955ab5186b3824608499e753ca
 def on_grid_random():
     x = random.randint(0,590)
     y = random.randint(0,590)
@@ -25,7 +28,11 @@ RIGHT = 1
 DOWN = 2
 LEFT = 3
 
+<<<<<<< HEAD
 
+=======
+pygame.init()
+>>>>>>> d9ebb8f7598099955ab5186b3824608499e753ca
 window = pygame.display.set_mode((600,600))
 PIXEL_SIZE = 10
 pygame.display.set_caption('Snake')
