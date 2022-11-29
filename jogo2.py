@@ -4,7 +4,7 @@ import pygame
 import random
 
 pygame.init()
-pygame.mixer.init()
+#pygame.mixer.init()
 
 # ----- Gera tela principal
 WIDTH = 600
@@ -26,8 +26,9 @@ def load_assets():
     assets["score_font"] = pygame.font.Font('assets/font/PressStart2P.ttf', 28)
 
     # Carrega os sons do jogo
-    pygame.mixer.music.load('assets/snd/tgfcoder-FrozenJam-SeamlessLoop.ogg')
-    pygame.mixer.music.set_volume(0.4)
-    assets['mordendo_sound'] = pygame.mixer.Sound('assets/snd/expl3.wav')
-    assets['musiquinha_sound'] = pygame.mixer.Sound('assets/snd/pew.wav')
+    #pygame.mixer.music.load('assets/snd/tgfcoder-FrozenJam-SeamlessLoop.ogg')
+    #pygame.mixer.music.set_volume(0.4)
+    #assets['mordendo_sound'] = pygame.mixer.Sound('assets/snd/expl3.wav')
+    #assets['musiquinha_sound'] = pygame.mixer.Sound('assets/snd/pew.wav')
     return assets
+
