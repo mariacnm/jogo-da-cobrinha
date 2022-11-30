@@ -21,10 +21,12 @@ QUIT = 2
 pygame.mixer.music.load('assets.py/sons/musica_principal2.mp3')
 pygame.mixer.music.set_volume(0.4)
 mordendo_sound = pygame.mixer.Sound('assets.py/sons/mordendo.mp3')
+fail_sound = pygame.mixer.Sound('assets.py/sons/fail.mp3')
 
 def tela_inicial(screen):
     background= pygame.image.load("assets.py/imagens/jogo.png").convert()
     background_rect= background.get_rect()
+
 
 
     rodando=True
@@ -99,7 +101,7 @@ def jogo(screen):
     apple_pos = random_on_grid()
 
     while True:
-        pygame.time.Clock().tick(15)
+        pygame.time.Clock().tick(12)
         screen.fill((0, 0, 0))
         for event in pygame.event.get():
             if event.type == QUIT:
@@ -117,21 +119,30 @@ def jogo(screen):
             snake_pos.append((-10, -10))
             apple_pos = random_on_grid()
             score+=10
-            printa = mensagem_tela("Score: " + str(score), WHITE, 24, 600/2, 600/2)
-            print(score)
-
+            if score >=50:
+                screen.fill((0, 0, 0))
+                snake_surface.fill((255, 255, 0))
+            if score >=100:
+                #screen.fill((0, 0, 0))
+                snake_surface.fill((255, 105, 180))
+            if score >=150:
+                #screen.fill((0, 0, 0))
+                snake_surface.fill((0, 71, 170))
+            
+        printa = mensagem_tela("Score: " + str(score), WHITE, 24, 600/2, 10)
         for pos in snake_pos:
             screen.blit(snake_surface, pos)
-
+        
         for i in range(len(snake_pos) - 1, 0, -1):
             if collision(snake_pos[0], snake_pos[i]):
-                #restart_game()
+                fail_sound.play()
                 pygame.quit()
                 quit()
                 break
             snake_pos[i] = snake_pos[i - 1]
 
         if off_limits(snake_pos[0]):
+            fail_sound.play()
             pygame.quit()
             quit()
 
