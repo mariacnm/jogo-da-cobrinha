@@ -174,11 +174,11 @@ def jogo(screen):
         
         for i in range(len(snake_pos) - 1, 0, -1): #colisao com a propria cobra
             if collision(snake_pos[0], snake_pos[i]):
-                score=0
+                #score=0
                 #restart_game()
-                state=errou
-                #pygame.quit()
-                #quit()
+                #state=errou
+                pygame.quit()
+                quit()
                 break
             snake_pos[i] = snake_pos[i - 1]
 
