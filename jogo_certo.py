@@ -142,7 +142,7 @@ def jogo(screen):
     apple_surface.fill((255, 0, 0))
     apple_pos = random_on_grid()
     
-
+    soma = 0
     while True:
         pygame.time.Clock().tick(12)
         screen.fill((133, 187, 101))
@@ -157,16 +157,19 @@ def jogo(screen):
 
         screen.blit(apple_surface, apple_pos)
 
-        if collision(apple_pos, snake_pos[0]): #colisao com a maça
+        if collision(apple_pos, snake_pos[0]):#colisao com a maça
+            soma+=1
             mordendo_sound.play()
             snake_pos.append((-20, -20))
             apple_pos = random_on_grid()
             score+=10
+            if soma == 35:
+                pygame.time.Clock().tick(20)
             if score >=50:
                 #screen.fill((0, 0, 0))
                 snake_surface.fill((255, 255, 0))
             if score >=100:
-                snake_surface.fill((255, 105, 180))
+                snake_surface.fill((0, 71, 170))
             if score >=150:
                 snake_surface.fill((0, 71, 170))
             if score >= 200:
