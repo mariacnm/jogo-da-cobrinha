@@ -139,6 +139,7 @@ def jogo(screen):
     apple_surface = pygame.Surface((PIXEL_SIZE, PIXEL_SIZE))
     apple_surface.fill((255, 0, 0))
     apple_pos = random_on_grid()
+    
 
     while True:
         pygame.time.Clock().tick(12)
