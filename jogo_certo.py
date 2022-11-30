@@ -10,6 +10,7 @@ RED = (255, 0, 0)
 GREEN = (0, 255, 0)
 BLUE = (0, 0, 255)
 YELLOW = (255, 255, 0)
+VERDE = (133, 187, 101)
 
 #importando py music
 pygame.init()
@@ -143,7 +144,7 @@ def jogo(screen):
 
     while True:
         pygame.time.Clock().tick(12)
-        screen.fill((0, 0, 0))
+        screen.fill((133, 187, 101))
         for event in pygame.event.get():
             if event.type == QUIT:
                 pygame.quit()
@@ -161,12 +162,18 @@ def jogo(screen):
             apple_pos = random_on_grid()
             score+=10
             if score >=50:
-                screen.fill((0, 0, 0))
+                #screen.fill((0, 0, 0))
                 snake_surface.fill((255, 255, 0))
             if score >=100:
                 snake_surface.fill((255, 105, 180))
             if score >=150:
                 snake_surface.fill((0, 71, 170))
+            if score >= 200:
+                snake_surface.fill((148, 0, 211))
+            if score >= 250:
+                snake_surface.fill((0, 255, 255))
+            if score >= 300:
+                snake_surface.fill((0, 0, 0))
             
         printa = mensagem_tela("Score: " + str(score), WHITE, 24, 600/2, 10) #score
         for pos in snake_pos:
