@@ -157,7 +157,7 @@ def jogo(screen):
 
         if collision(apple_pos, snake_pos[0]): #colisao com a maça
             mordendo_sound.play()
-            snake_pos.append((-10, -10))
+            snake_pos.append((-20, -20))
             apple_pos = random_on_grid()
             score+=10
             if score >=50:
