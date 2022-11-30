@@ -12,6 +12,7 @@ BLUE = (0, 0, 255)
 YELLOW = (255, 255, 0)
 VERDE = (133, 187, 101)
 
+lista_cor=[WHITE,RED,GREEN,BLUE,YELLOW]
 #importando py music
 pygame.init()
 pygame.mixer.init()
