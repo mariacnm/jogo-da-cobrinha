@@ -155,12 +155,15 @@ def jogo(screen):
             if event.type == QUIT:
                 pygame.quit()
                 quit()
+                
             elif event.type == KEYDOWN:
                 if event.key in [K_UP, K_DOWN, K_LEFT, K_RIGHT]:
                     snake_direction = event.key
 
 
         screen.blit(apple_surface, apple_pos)
+
+
 
         if collision(apple_pos, snake_pos[0]):#colisao com a maça
             mordendo_sound.play()
@@ -199,16 +202,22 @@ def jogo(screen):
         for i in range(len(snake_pos) - 1, 0, -1): #colisao com a propria cobra
             if collision(snake_pos[0], snake_pos[i]):
                 state=errou
-                if state==errou :
+                if state == errou:
+                    fundo_over= pygame.image.load("assets.py/imagens/gameover.png").convert()
+                    fundo_over_rect= fundo_over.get_rect()
                     screen.fill((0,0,0))
+                    screen.blit(fundo_over,fundo_over_rect)
+                    printa = mensagem_tela("Score: " + str(score), WHITE, 50, 600/2, 25) #score
 
-                    #screen.blit()
+                if event.type == QUIT:
+                        pygame.display.quit()
+                        quit()
                 False
+                            
+                
                 #score=0
                 #restart_game()
-                #state=errou
-                #pygame.quit()
-                #quit()
+                    
                 #break
             snake_pos[i] = snake_pos[i - 1]
 
@@ -219,7 +228,8 @@ def jogo(screen):
                 fundo_over_rect= fundo_over.get_rect()
                 screen.fill((0,0,0))
                 screen.blit(fundo_over,fundo_over_rect)
-                
+                printa = mensagem_tela("Score: " + str(score), WHITE, 50, 600/2, 25) #score
+
             False
            #pygame.quit()
             #quit()
@@ -234,6 +244,8 @@ def jogo(screen):
             snake_pos[0] = (snake_pos[0][0] + PIXEL_SIZE, snake_pos[0][1])
         pygame.display.update()
 
+
+
 state = INIT
 while state!=QUIT:
     if state == INIT:
@@ -246,3 +258,5 @@ while state!=QUIT:
         
     else:
         state= QUIT
+
+
