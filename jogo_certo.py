@@ -25,8 +25,8 @@ GAME = 1
 QUIT = 2
 errou=3
 
-pygame.mixer.music.load('assets.py/sons/musica_principal2.mp3') #musica principal(mario bros)
-pygame.mixer.music.set_volume(0.4)#volume da musica principal
+M_principal=pygame.mixer.music.load('assets.py/sons/musica_principal2.mp3') #musica principal(mario bros)
+M_principal=pygame.mixer.music.set_volume(0.4)#volume da musica principal
 mordendo_sound = pygame.mixer.Sound('assets.py/sons/mordendo.mp3')#musica quando morde a maça
 fail_sound = pygame.mixer.Sound('assets.py/sons/fail.mp3')#musica de game over
 
@@ -136,7 +136,7 @@ def restart_game():
 def jogo(screen):
 
     score=0
-    pygame.mixer.music.play(loops=-1)
+    M_principal=pygame.mixer.music.play(loops=-1)
     snake_pos = [(250, 50), (260, 50), (270, 50)]
     snake_surface = pygame.Surface((PIXEL_SIZE, PIXEL_SIZE))
     snake_surface.fill((255, 255, 255))
@@ -202,34 +202,31 @@ def jogo(screen):
         for i in range(len(snake_pos) - 1, 0, -1): #colisao com a propria cobra
             if collision(snake_pos[0], snake_pos[i]):
                 state=errou
+                M_principal=pygame.mixer.music.pause()
+                #tentamos colocar uma musica quanodo da gameover mas não deu certo achamos que e o tamanho da musica
+                #fail_sound=pygame.mixer.music.play(loops=-1)
                 if state == errou:
                     fundo_over= pygame.image.load("assets.py/imagens/gameover.png").convert()
                     fundo_over_rect= fundo_over.get_rect()
                     screen.fill((0,0,0))
                     screen.blit(fundo_over,fundo_over_rect)
                     printa = mensagem_tela("Score: " + str(score), WHITE, 50, 600/2, 25) #score
-
-                if event.type == QUIT:
-                        pygame.display.quit()
-                        quit()
                 False
-                            
-                
-                #score=0
-                #restart_game()
-                    
-                #break
+                #pygame.quit()
+                #quit()
             snake_pos[i] = snake_pos[i - 1]
 
         if off_limits(snake_pos[0]):
             state=errou
+            M_principal=pygame.mixer.music.pause()
+            #tentamos colocar uma musica quanodo da gameover mas não deu certo achamos que e o tamanho da musica
+            #fail_sound=pygame.mixer.music.play(loops=-1)
             if state==errou :
                 fundo_over= pygame.image.load("assets.py/imagens/gameover.png").convert()
                 fundo_over_rect= fundo_over.get_rect()
                 screen.fill((0,0,0))
                 screen.blit(fundo_over,fundo_over_rect)
                 printa = mensagem_tela("Score: " + str(score), WHITE, 50, 600/2, 25) #score
-
             False
            #pygame.quit()
             #quit()
@@ -253,9 +250,7 @@ while state!=QUIT:
     elif state == GAME:
         state = jogo(screen)
     elif state== errou:
-        #state= tela_gameover(screen)
-        screen.fill(0,0,0)
-        
+        state= tela_gameover(screen)
     else:
         state= QUIT
 
