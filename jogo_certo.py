@@ -66,39 +66,43 @@ def tela_inicial(screen):
         pygame.display.flip()
 
 
-def tela_gameover(screen):
-    background2= pygame.image.load("assets.py/imagens/gameover.png").convert()
-    background_rect2= background2.get_rect()
-    rodando2=True
-    while rodando2:
-        pygame.time.Clock().tick(15)
-        screen.fill((0, 0, 0))
-        screen.blit(background2,background_rect2)
-        
-        for event in pygame.event.get():
-            if event.type== pygame.QUIT:
-                rodando2 = False
-                return QUIT
-            if event.type == pygame.KEYUP:
-                state = GAME
-                return GAME
 
-        pygame.display.flip()
 
 
 
 
 #funcao de colissão
 def collision(pos1, pos2):
+    state= errou
     return pos1 == pos2
 
 #funcao de limite de tela bateu morreu
 def off_limits(pos):
     if 0 <= pos[0] < WINDOW_SIZE[0] and 0 <= pos[1] < WINDOW_SIZE[1]:
+        state=errou
         return False
     else:
         return True
 
+def tela_gameover(screen):
+    fundo_over= pygame.image.load("assets.py/imagens/gameover.png").convert()
+    fundo_over_rect= fundo_over.get_rect()
+    rodando2=True
+    while rodando2:
+        pygame.time.Clock().tick(12)
+        screen.fill((0, 0, 0))
+        screen.blit(fundo_over,fundo_over_rect)
+        
+        for event in pygame.event.get():
+            if event.type== pygame.QUIT:
+                rodando2 = False
+                return QUIT
+            if collision and off_limits:
+                state = errou
+                return errou
+
+        pygame.display.flip()
+        
 #funcao para criar maças aleatorias
 def random_on_grid():
     x = random.randint(0, WINDOW_SIZE[0])
@@ -142,9 +146,10 @@ def jogo(screen):
     apple_surface.fill((255, 0, 0))
     apple_pos = random_on_grid()
     
+    fps=12
     soma = 0
     while True:
-        pygame.time.Clock().tick(12)
+        pygame.time.Clock().tick(fps)
         screen.fill((133, 187, 101))
         for event in pygame.event.get():
             if event.type == QUIT:
@@ -158,44 +163,66 @@ def jogo(screen):
         screen.blit(apple_surface, apple_pos)
 
         if collision(apple_pos, snake_pos[0]):#colisao com a maça
-            soma+=1
             mordendo_sound.play()
             snake_pos.append((-20, -20))
             apple_pos = random_on_grid()
             score+=10
-            if soma == 35:
-                pygame.time.Clock().tick(20)
             if score >=50:
-                #screen.fill((0, 0, 0))
                 snake_surface.fill((255, 255, 0))
             if score >=100:
                 snake_surface.fill((0, 71, 170))
+                fps=15
             if score >=150:
-                snake_surface.fill((0, 71, 170))
+                snake_surface.fill((0, 102, 51))
             if score >= 200:
                 snake_surface.fill((148, 0, 211))
+                fps=18
             if score >= 250:
                 snake_surface.fill((0, 255, 255))
             if score >= 300:
                 snake_surface.fill((0, 0, 0))
-            
+                fps=22
+            if score>= 350:
+                snake_surface.fill((255,140,0))
+            if score>= 400:
+                snake_surface.fill((128,0,0))
+            if score>= 450:
+                snake_surface.fill((102,51,51))
+            if score>= 500:
+                snake_surface.fill((148,0,211))
+                fps=25
+
         printa = mensagem_tela("Score: " + str(score), WHITE, 24, 600/2, 10) #score
         for pos in snake_pos:
             screen.blit(snake_surface, pos)
         
         for i in range(len(snake_pos) - 1, 0, -1): #colisao com a propria cobra
             if collision(snake_pos[0], snake_pos[i]):
+                state=errou
+                if state==errou :
+                    screen.fill((0,0,0))
+
+                    #screen.blit()
+                False
                 #score=0
                 #restart_game()
                 #state=errou
-                pygame.quit()
-                quit()
-                break
+                #pygame.quit()
+                #quit()
+                #break
             snake_pos[i] = snake_pos[i - 1]
 
         if off_limits(snake_pos[0]):
-            pygame.quit()
-            quit()
+            state=errou
+            if state==errou :
+                fundo_over= pygame.image.load("assets.py/imagens/gameover.png").convert()
+                fundo_over_rect= fundo_over.get_rect()
+                screen.fill((0,0,0))
+                screen.blit(fundo_over,fundo_over_rect)
+                
+            False
+           #pygame.quit()
+            #quit()
 
         if snake_direction == K_UP:
             snake_pos[0] = (snake_pos[0][0], snake_pos[0][1] - PIXEL_SIZE)
@@ -214,6 +241,8 @@ while state!=QUIT:
     elif state == GAME:
         state = jogo(screen)
     elif state== errou:
-        state= tela_gameover(screen)
+        #state= tela_gameover(screen)
+        screen.fill(0,0,0)
+        
     else:
         state= QUIT
